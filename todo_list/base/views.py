@@ -33,4 +33,4 @@ class TaskDeleteView(DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
-    template_name = "Delete_Task.html"
+    template_name = "base/Delete_Task.html"
