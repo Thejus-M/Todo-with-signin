@@ -4,12 +4,16 @@
 
 <table>
     <tr>
-        <th>Item</tr>
+        <th>Item</th>
+        <th></th>
+        <th></th>
         </tr>
     {% for task in tasks %}
     <tr>
         <td>{{task.title}}</td>
         <td><a href="{% url 'task' task.id %}">Views</a></td>
+        <td><a href="{% url 'update-task' task.id %}">Edit Task</a></td>
+        <td><a href="{% url 'delete-task' task.id %}">delete Task</a></td>
     </tr>
     {% empty %}
         <h3>No Item</h3>
