@@ -3,7 +3,20 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
+
+from django.contrib.auth.views import LoginView
+
 from .models import Task
+
+
+class CustomLoginView(LoginView):
+    template_name = "base/login.html"
+    fields = '__all__'
+    redirect_authenticated_user = True
+    
+    def get_success_url(self):
+        return reverse_lazy('tasks')
+    
 
 
 class TaskList(ListView):
@@ -34,3 +47,4 @@ class TaskDeleteView(DeleteView):
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
     template_name = "base/Delete_Task.html"
+
