@@ -27,25 +27,25 @@ class TaskList(LoginRequiredMixin,ListView):
     context_object_name = 'tasks'
 
 
-class TaskDetail(DetailView):
+class TaskDetail(LoginRequiredMixin,DetailView):
     model = Task
     context_object_name = 'task'
 
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin,CreateView):
     model = Task
     fields = '__all__'  # This is to show which all field should be displayed here all
     # else ['fieldname','in alist']
     success_url = reverse_lazy('tasks')
     template_name = "base/Createtask.html"
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin,UpdateView):
     model = Task
     fields = '__all__' 
     success_url = reverse_lazy('tasks')
     template_name = "base/Createtask.html"
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin,DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
