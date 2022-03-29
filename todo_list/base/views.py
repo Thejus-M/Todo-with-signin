@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect
 from .models import Task
 
 class CustomLoginView(LoginView):
-    template_name = "base/login.html "
+    template_name = "base/login.html"
     fields = '__all__'
     redirect_authenticated_user = True
 
@@ -52,7 +52,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(TaskCreateView, self).form_vaild(form)
+        return super(TaskCreateView, self).form_valid(form)
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
