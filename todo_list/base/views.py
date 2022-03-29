@@ -26,6 +26,13 @@ class TaskList(LoginRequiredMixin,ListView):
     model = Task 
     context_object_name = 'tasks'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = context["tasks"].filter(user=self.request.user)
+        context["count"] = context["tasks"].filter(complete=False)
+        return context
+    
+
 
 class TaskDetail(LoginRequiredMixin,DetailView):
     model = Task
@@ -34,14 +41,16 @@ class TaskDetail(LoginRequiredMixin,DetailView):
 
 class TaskCreateView(LoginRequiredMixin,CreateView):
     model = Task
-    fields = '__all__'  # This is to show which all field should be displayed here all
-    # else ['fieldname','in alist']
+    fields = ['title','description','complete']
     success_url = reverse_lazy('tasks')
     template_name = "base/Createtask.html"
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super(TaskCreateView, self).form_vaild(form)
 
 class TaskUpdateView(LoginRequiredMixin,UpdateView):
     model = Task
-    fields = '__all__' 
+    fields = ['title','description','complete']
     success_url = reverse_lazy('tasks')
     template_name = "base/Createtask.html"
 
