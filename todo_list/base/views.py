@@ -4,16 +4,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
-                                  ListView, UpdateView)
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, FormView, ListView, UpdateView)
 
 from django.shortcuts import render, redirect
 
+
 from .models import Task
 
-
 class CustomLoginView(LoginView):
-    template_name = "base/login.html"
+    template_name = "base/login.html "
     fields = '__all__'
     redirect_authenticated_user = True
 
